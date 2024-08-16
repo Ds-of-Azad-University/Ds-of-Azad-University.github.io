@@ -1,1 +1,3 @@
-# DSforAzadUni.github.io
+Ds plans  
+
+15 weeks problem packs
