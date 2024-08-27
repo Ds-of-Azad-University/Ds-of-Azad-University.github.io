@@ -238,7 +238,9 @@
           if (filePath) { // If a file path is provided
             button.classList.remove('inactive');
             button.classList.add('active');
-            button.onclick = () => window.open(filePath, '_blank');
+            button.onclick = () => {
+              window.open(filePath, '_blank');
+            };
           } else {
             button.classList.remove('active');
             button.classList.add('inactive');
