@@ -1,308 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Data Structure Course</title>
-    <style>
-      /* General Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box !important;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Structure Course</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box !important;
+    }
 
-      html, body {
-        height: 100%;
-        zoom: 0.9;
-      }
+    html, body {
+      height: 100%;
+      zoom: 0.9;
+    }
 
-      body {
-        display: table;
-        width: 100%;
-        height: 100%;
-        background-color: #171717;
-        color: #fff;
-        line-height: 1.6;
-        position: relative;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-      }
+    body {
+      display: table;
+      width: 100%;
+      height: 100%;
+      background-color: #171717;
+      color: #fff;
+      line-height: 1.6;
+      position: relative;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
 
-      .lines {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        margin: auto;
-        width: 90vw;
-      }
+    .lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      margin: auto;
+      width: 90vw;
+    }
 
-      .line {
-        position: absolute;
-        width: 1px;
-        height: 100%;
-        top: 0;
-        left: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-      }
+    .line {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      top: 0;
+      left: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
 
-      .line::after {
-        content: '';
-        display: block;
-        position: absolute;
-        height: 15vh;
-        width: 100%;
+    .line::after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 15vh;
+      width: 100%;
+      top: -50%;
+      left: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+      animation: drop 7s 0s infinite;
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+    }
+
+    .line:nth-child(1) {
+      margin-left: -25%;
+    }
+
+    .line:nth-child(1)::after {
+      animation-delay: 2s;
+    }
+
+    .line:nth-child(3) {
+      margin-left: 25%;
+    }
+
+    .line:nth-child(3)::after {
+      animation-delay: 2.5s;
+    }
+
+    @keyframes drop {
+      0% {
         top: -50%;
-        left: 0;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-        animation: drop 7s 0s infinite;
-        animation-fill-mode: forwards;
-        animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
       }
+      100% {
+        top: 110%;
+      }
+    }
 
-      .line:nth-child(1) {
-        margin-left: -25%;
-      }
+    /* Content Styles */
+    #mainContent {
+      width: 90%;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 20px;
+    }
 
-      .line:nth-child(1)::after {
-        animation-delay: 2s;
-      }
+    header {
+      margin-bottom: 50px;
+    }
 
-      .line:nth-child(3) {
-        margin-left: 25%;
-      }
+    .w3-container {
+      margin: 30px 0;
+    }
 
-      .line:nth-child(3)::after {
-        animation-delay: 2.5s;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+    }
 
-      @keyframes drop {
-        0% {
-          top: -50%;
-        }
-        100% {
-          top: 110%;
-        }
-      }
+    th, td {
+      padding: 12px;
+      border: 1px solid #444;
+      text-align: left;
+    }
 
-      /* Content Styles */
-      #mainContent {
-        width: 90%;
-        margin: 0 auto;
-        text-align: center;
-        padding-top: 20px;
-      }
+    th {
+      background-color: #333;
+      text-align: center;
+    }
 
-      header {
-        margin-bottom: 50px;
-      }
+    td {
+      background-color: #222;
+    }
 
-      .w3-container {
-        margin: 30px 0;
-      }
+    button {
+      background-color: #444;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: not-allowed;
+      transition: background-color 0.3s;
+      margin: 0 10px;
+    }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 30px 0;
-      }
+    button.active {
+      background-color: #0a5; /* Slight green */
+      cursor: pointer;
+    }
 
-      th, td {
-        padding: 12px;
-        border: 1px solid #444;
-        text-align: center;
-      }
+    button.inactive {
+      background-color: #555; /* Gray */
+    }
 
-      th {
-        background-color: #333;
-      }
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #fff;
+    }
 
-      td {
-        background-color: #222;
-      }
+    .week-container {
+      padding: 20px;
+      border: 2px solid #ff3c00; /* Slight red border */
+      background-color: #333;
+      margin-bottom: 40px; /* Increased space between sections */
+      border-radius: 8px;
+    }
 
-      button {
-        background-color: #555;
-        color: #fff;
-        border: none;
-        padding: 12px;
-        cursor: not-allowed;
-        transition: background-color 0.3s;
-        font-size: 16px;
-        width: 100%;
-        text-align: center;
-      }
+    .week-title {
+      text-align: center;
+      font-size: 28px; /* Increased size */
+      font-weight: bold; /* Bold title */
+      color: #fff;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Lines -->
+  <div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
 
-      button.active {
-        background-color: #0a5; /* Light green */
-        cursor: pointer;
-      }
+  <!-- Main Content -->
+  <div id="mainContent" class="w3-main">
+    <header id="home" class="w3-container w3-center w3-padding-32">
+      <h1 class="w3-jumbo">Data Structure Course</h1>
+      <p class="w3-text-light-grey">Master the Fundamentals</p>
+      <!-- Introduction and Contact Us -->
+      <p>Introduction text goes here. Contact us: email@example.com</p>
+    </header>
 
-      button.inactive {
-        background-color: #777; /* Gray */
-      }
-
-      h2 {
-        margin-bottom: 20px;
-        text-align: center;
-        color: #fff;
-      }
-
-      .week-container {
-        padding: 20px;
-        border: 2px solid #ff3c00; /* Slight red border */
-        background-color: #333;
-        margin-bottom: 40px; /* Increased space between sections */
-        border-radius: 8px;
-      }
-
-      .week-title {
-        text-align: center;
-        font-size: 32px; /* Increased size */
-        font-weight: bold; /* Bold title */
-        color: #fff;
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Theme Lines -->
-    <div class="lines">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
+    <!-- Course Content -->
+    <div id="overview" class="w3-container">
+      <h2>Course Overview</h2>
+      <p>
+        This course covers essential data structures and algorithms, designed
+        to build a strong foundation in programming and problem-solving.
+      </p>
     </div>
 
-    <!-- Main Content -->
-    <div id="mainContent" class="w3-main">
-      <header id="home" class="w3-container w3-center w3-padding-32">
-        <h1 class="w3-jumbo">Data Structure Course</h1>
-        <p class="w3-text-light-grey">Master the Fundamentals</p>
-        <!-- Introduction and Contact Us -->
-        <p>Introduction text goes here. Contact us: email@example.com</p>
-      </header>
-
-      <!-- Course Content -->
-      <div id="overview" class="w3-container">
-        <h2>Course Overview</h2>
-        <p>
-          This course covers essential data structures and algorithms, designed
-          to build a strong foundation in programming and problem-solving.
-        </p>
-      </div>
-
-      <!-- Weeks 0-15 -->
-      <!-- Week 0 -->
-      <div id="week0" class="week-container">
-        <div class="week-title">Week 0</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-              <th>Answer Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 0</td>
-              <td><button id="week0-problem" class="inactive">Problem Pack</button></td>
-              <td><button id="week0-pdf" class="inactive">PDF Pack</button></td>
-              <td><button id="week0-answer" class="inactive">Answer Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Repeat for Weeks 1 to 15 -->
-      <!-- Example for Week 1 -->
-      <div id="week1" class="week-container">
-        <div class="week-title">Week 1</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-              <th>Answer Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 1</td>
-              <td><button id="week1-problem" class="inactive">Problem Pack</button></td>
-              <td><button id="week1-pdf" class="inactive">PDF Pack</button></td>
-              <td><button id="week1-answer" class="inactive">Answer Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Repeat for Weeks 2 to 15 -->
-
-      <!-- Week 15 -->
-      <div id="week15" class="week-container">
-        <div class="week-title">Week 15</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-              <th>Answer Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 15</td>
-              <td><button id="week15-problem" class="inactive">Problem Pack</button></td>
-              <td><button id="week15-pdf" class="inactive">PDF Pack</button></td>
-              <td><button id="week15-answer" class="inactive">Answer Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- Weeks 0-2 -->
+    <!-- Week 0 -->
+    <div id="week0" class="week-container">
+      <div class="week-title">Week 0</div>
+      <button id="week0-problem" class="inactive">Problem Pack</button>
+      <button id="week0-pdf" class="inactive">PDF Pack</button>
+      <button id="week0-answer" class="inactive">Answer Pack</button>
     </div>
 
-    <script>
-      // Function to open the link or show message
-      function openLink(week, type) {
+    <!-- Week 1 -->
+    <div id="week1" class="week-container">
+      <div class="week-title">Week 1</div>
+      <button id="week1-problem" class="inactive">Problem Pack</button>
+      <button id="week1-pdf" class="inactive">PDF Pack</button>
+      <button id="week1-answer" class="inactive">Answer Pack</button>
+    </div>
+
+    <!-- Week 2 -->
+    <div id="week2" class="week-container">
+      <div class="week-title">Week 2</div>
+      <button id="week2-problem" class="inactive">Problem Pack</button>
+      <button id="week2-pdf" class="inactive">PDF Pack</button>
+      <button id="week2-answer" class="inactive">Answer Pack</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to update button status
+    function updateButtonStatus(week, problem, pdf, answer) {
+      const buttonIds = ['problem', 'pdf', 'answer'];
+      buttonIds.forEach((type) => {
         const button = document.querySelector(`#${week}-${type}`);
-        if (button && button.classList.contains('active')) {
-          // Construct file path and open it
-          const filePath = `data/${week}/${type}.pdf`; // Update the extension based on your files
-          window.open(filePath, '_blank');
-        } else {
-          alert('This file is not available yet.');
-        }
-      }
-
-      // Update button colors based on file uploads
-      function updateButtonStatus(week, fileStatus) {
-        const buttons = document.querySelectorAll(`#${week} button`);
-        buttons.forEach((button) => {
-          if (fileStatus[button.id]) {
-            button.classList.remove("inactive");
-            button.classList.add("active");
-            button.onclick = () => openLink(week, button.id.split('-')[1]); // Set up link opening
+        if (button) {
+          if (eval(type)) { // Evaluates to true or false
+            button.classList.remove('inactive');
+            button.classList.add('active');
+            button.onclick = () => openLink(week, type); // Set up click action
           } else {
-            button.classList.remove("active");
-            button.classList.add("inactive");
+            button.classList.remove('active');
+            button.classList.add('inactive');
             button.onclick = () => alert('This file is not available yet.');
           }
-        });
-      }
-
-      // Example of enabling week 1 buttons after upload
-      updateButtonStatus('week0', {
-        'week0-problem': true, // Set to false to keep them gray
-        'week0-pdf': false,
-        'week0-answer': false,
+        }
       });
-    </script>
-  </body>
+    }
+
+    // Function to open the link or show a message
+    function openLink(week, type) {
+      const filePath = `data/${week}/${type}.pdf`; // Adjust file path and extension
+      window.open(filePath, '_blank');
+    }
+
+    // Example usage
+    // Set file status for Week 0
+    updateButtonStatus('week0', true, false, false); // Problem Pack active, others inactive
+
+    // Set file status for Week 1
+    updateButtonStatus('week1', true, true, false); // Problem and PDF Packs active, Answer Pack inactive
+
+    // Set file status for Week 2
+    updateButtonStatus('week2', false, true, true); // PDF and Answer Packs active, Problem Pack inactive
+  </script>
+</body>
 </html>
