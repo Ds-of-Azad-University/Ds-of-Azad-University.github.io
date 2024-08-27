@@ -129,12 +129,13 @@
       background-color: #444;
       color: #fff;
       border: none;
-      padding: 15px 20px; /* Increased padding for larger buttons */
-      font-size: 18px; /* Increased font size */
-      font-weight: bold; /* Bold text */
+      padding: 20px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: not-allowed;
       transition: background-color 0.3s;
-      margin: 10px; /* Space between buttons */
+      margin: 0 10px;
+      border-radius: 5px;
     }
 
     button.active {
@@ -162,7 +163,7 @@
 
     .week-title {
       text-align: center;
-      font-size: 32px; /* Increased size */
+      font-size: 28px; /* Increased size */
       font-weight: bold; /* Bold title */
       color: #fff;
       margin-bottom: 20px;
@@ -222,16 +223,22 @@
   </div>
 
   <script>
-    // Function to update button status
-    function updateButtonStatus(week, problem, pdf, answer) {
-      const buttonIds = ['problem', 'pdf', 'answer'];
-      buttonIds.forEach((type) => {
+    // Function to update button status with specific file paths
+    function updateButtonStatus(week, problemFile, pdfFile, answerFile) {
+      const buttonFileMap = {
+        problem: problemFile,
+        pdf: pdfFile,
+        answer: answerFile,
+      };
+
+      Object.keys(buttonFileMap).forEach((type) => {
         const button = document.querySelector(`#${week}-${type}`);
         if (button) {
-          if (eval(type)) { // Evaluates to true or false
+          const filePath = buttonFileMap[type];
+          if (filePath) { // If a file path is provided
             button.classList.remove('inactive');
             button.classList.add('active');
-            button.onclick = () => openLink(week, type); // Set up click action
+            button.onclick = () => window.open(filePath, '_blank');
           } else {
             button.classList.remove('active');
             button.classList.add('inactive');
@@ -241,21 +248,16 @@
       });
     }
 
-    // Function to open the link or show a message
-    function openLink(week, type) {
-      const filePath = `data/${week}/${type}.pdf`; // Adjust file path and extension
-      window.open(filePath, '_blank');
-    }
+    // Example usage with specific file paths
 
-    // Example usage
     // Set file status for Week 0
-    updateButtonStatus('week0', true, false, false); // Problem Pack active, others inactive
+    updateButtonStatus('week0', 'data/week0/problem_pack.pdf', '', ''); // Problem Pack active, others inactive
 
     // Set file status for Week 1
-    updateButtonStatus('week1', true, true, false); // Problem and PDF Packs active, Answer Pack inactive
+    updateButtonStatus('week1', 'data/week1/problem_pack.pdf', 'data/week1/pdf_pack.pdf', ''); // Problem and PDF Packs active, Answer Pack inactive
 
     // Set file status for Week 2
-    updateButtonStatus('week2', false, true, true); // PDF and Answer Packs active, Problem Pack inactive
+    updateButtonStatus('week2', '', 'data/week2/pdf_pack.pdf', 'data/week2/answer_pack.pdf'); // PDF and Answer Packs active, Problem Pack inactive
   </script>
 </body>
 </html>
