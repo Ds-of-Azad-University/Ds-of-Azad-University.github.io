@@ -113,12 +113,11 @@
       th, td {
         padding: 12px;
         border: 1px solid #444;
-        text-align: left;
+        text-align: center;
       }
 
       th {
         background-color: #333;
-        text-align: center;
       }
 
       td {
@@ -126,12 +125,14 @@
       }
 
       button {
-        background-color: #444;
+        background-color: #555;
         color: #fff;
         border: none;
-        padding: 10px;
+        padding: 12px;
         cursor: not-allowed;
         transition: background-color 0.3s;
+        font-size: 16px;
+        width: 100%;
       }
 
       button.active {
@@ -140,7 +141,7 @@
       }
 
       button.inactive {
-        background-color: #555;
+        background-color: #777;
       }
 
       h2 {
@@ -151,7 +152,7 @@
 
       .week-container {
         padding: 20px;
-        border: 2px solid #f00; /* Slight red border */
+        border: 2px solid #ff3c00; /* Slight red border */
         background-color: #333;
         margin-bottom: 40px; /* Increased space between sections */
         border-radius: 8px;
@@ -159,7 +160,7 @@
 
       .week-title {
         text-align: center;
-        font-size: 28px; /* Increased size */
+        font-size: 32px; /* Increased size */
         font-weight: bold; /* Bold title */
         color: #fff;
         margin-bottom: 20px;
@@ -200,17 +201,17 @@
           <thead>
             <tr>
               <th>Week</th>
-              <th>Answer Pack</th>
               <th>Problem Pack</th>
               <th>PDF Pack</th>
+              <th>Answer Pack</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Week 0</td>
-              <td><button class="inactive">Answer Pack</button></td>
-              <td><button class="inactive">Problem Pack</button></td>
-              <td><button class="inactive">PDF Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week0', 'problem')">Problem Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week0', 'pdf')">PDF Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week0', 'answer')">Answer Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -224,17 +225,17 @@
           <thead>
             <tr>
               <th>Week</th>
-              <th>Answer Pack</th>
               <th>Problem Pack</th>
               <th>PDF Pack</th>
+              <th>Answer Pack</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Week 1</td>
-              <td><button class="inactive">Answer Pack</button></td>
-              <td><button class="inactive">Problem Pack</button></td>
-              <td><button class="inactive">PDF Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week1', 'problem')">Problem Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week1', 'pdf')">PDF Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week1', 'answer')">Answer Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -249,17 +250,17 @@
           <thead>
             <tr>
               <th>Week</th>
-              <th>Answer Pack</th>
               <th>Problem Pack</th>
               <th>PDF Pack</th>
+              <th>Answer Pack</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Week 15</td>
-              <td><button class="inactive">Answer Pack</button></td>
-              <td><button class="inactive">Problem Pack</button></td>
-              <td><button class="inactive">PDF Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week15', 'problem')">Problem Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week15', 'pdf')">PDF Pack</button></td>
+              <td><button class="inactive" onclick="openLink('week15', 'answer')">Answer Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -267,19 +268,31 @@
     </div>
 
     <script>
+      // Function to open the link or show message
+      function openLink(week, type) {
+        const button = document.querySelector(`#${week} button.${type}`);
+        if (button && button.classList.contains('active')) {
+          // Add your file link logic here
+          alert(`Opening ${type} for ${week}`);
+        } else {
+          alert('This file is not available yet.');
+        }
+      }
+
       // Update button colors based on file uploads
       function updateButtonStatus(week, fileUploaded) {
-        const buttons = document.querySelectorAll(`#week${week} button`);
+        const buttons = document.querySelectorAll(`#${week} button`);
         buttons.forEach((button) => {
           if (fileUploaded) {
             button.classList.remove("inactive");
             button.classList.add("active");
+            button.onclick = () => openLink(week, button.textContent.toLowerCase().replace(' ', '-'));
           }
         });
       }
 
       // Example of enabling week 1 buttons after upload
-      updateButtonStatus(1, true); // Set to false to keep them gray
+      updateButtonStatus(0, true); // Set to false to keep them gray
     </script>
   </body>
 </html>
