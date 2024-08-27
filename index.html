@@ -225,26 +225,33 @@
   <script>
     // Function to update button status with specific file paths
     function updateButtonStatus(week, problemFile, pdfFile, answerFile) {
-      const buttonFileMap = {
-        problem: problemFile,
-        pdf: pdfFile,
-        answer: answerFile,
-      };
+      const problemButton = document.getElementById(`${week}-problem`);
+      const pdfButton = document.getElementById(`${week}-pdf`);
+      const answerButton = document.getElementById(`${week}-answer`);
 
-      Object.keys(buttonFileMap).forEach((type) => {
-        const button = document.querySelector(`#${week}-${type}`);
-        if (button) {
-          const filePath = buttonFileMap[type];
-          if (filePath) { // If a file path is provided
-            button.classList.remove('inactive');
-            button.classList.add('active');
-            button.addEventListener('click', () => window.open(filePath, '_blank'));
-          } else {
-            button.classList.remove('active');
-            button.classList.add('inactive');
-          }
-        }
-      });
+      if (problemFile) {
+        problemButton.classList.remove('inactive');
+        problemButton.classList.add('active');
+        problemButton.onclick = function() {
+          window.open(problemFile, '_blank');
+        };
+      }
+
+      if (pdfFile) {
+        pdfButton.classList.remove('inactive');
+        pdfButton.classList.add('active');
+        pdfButton.onclick = function() {
+          window.open(pdfFile, '_blank');
+        };
+      }
+
+      if (answerFile) {
+        answerButton.classList.remove('inactive');
+        answerButton.classList.add('active');
+        answerButton.onclick = function() {
+          window.open(answerFile, '_blank');
+        };
+      }
     }
 
     // Example usage with specific file paths
