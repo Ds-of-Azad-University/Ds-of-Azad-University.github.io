@@ -100,6 +100,10 @@
         margin-bottom: 50px;
       }
 
+      .w3-container {
+        margin: 30px 0;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
@@ -114,6 +118,7 @@
 
       th {
         background-color: #333;
+        text-align: center;
       }
 
       td {
@@ -133,6 +138,32 @@
         background-color: #0a5;
         cursor: pointer;
       }
+
+      button.inactive {
+        background-color: #555;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #fff;
+      }
+
+      .week-container {
+        padding: 20px;
+        border: 2px solid #f00; /* Slight red border */
+        background-color: #333;
+        margin-bottom: 40px; /* Increased space between sections */
+        border-radius: 8px;
+      }
+
+      .week-title {
+        text-align: center;
+        font-size: 28px; /* Increased size */
+        font-weight: bold; /* Bold title */
+        color: #fff;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
@@ -148,7 +179,7 @@
       <header id="home" class="w3-container w3-center w3-padding-32">
         <h1 class="w3-jumbo">Data Structure Course</h1>
         <p class="w3-text-light-grey">Master the Fundamentals</p>
-        <!-- You can write your introduction and contact details here -->
+        <!-- Introduction and Contact Us -->
         <p>Introduction text goes here. Contact us: email@example.com</p>
       </header>
 
@@ -163,8 +194,8 @@
 
       <!-- Weeks 0-15 -->
       <!-- Week 0 -->
-      <div id="week0" class="w3-container">
-        <h2>Week 0</h2>
+      <div id="week0" class="week-container">
+        <div class="week-title">Week 0</div>
         <table>
           <thead>
             <tr>
@@ -187,8 +218,8 @@
 
       <!-- Repeat for Weeks 1 to 15 -->
       <!-- Example for Week 1 -->
-      <div id="week1" class="w3-container">
-        <h2>Week 1</h2>
+      <div id="week1" class="week-container">
+        <div class="week-title">Week 1</div>
         <table>
           <thead>
             <tr>
@@ -212,8 +243,8 @@
       <!-- Repeat for Weeks 2 to 15 -->
 
       <!-- Week 15 -->
-      <div id="week15" class="w3-container">
-        <h2>Week 15</h2>
+      <div id="week15" class="week-container">
+        <div class="week-title">Week 15</div>
         <table>
           <thead>
             <tr>
