@@ -4,89 +4,155 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Data Structure Course</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <style>
-      body,
-      html {
-        height: 100%;
+      /* General Styles */
+      * {
         margin: 0;
-        font-family: "Arial", sans-serif;
-        background-color: #000;
-        color: #fff;
+        padding: 0;
+        box-sizing: border-box !important;
       }
 
-      .matrix {
-        position: fixed;
-        top: 0;
-        left: 0;
+      html, body {
+        height: 100%;
+        zoom: 0.9;
+      }
+
+      body {
+        display: table;
         width: 100%;
         height: 100%;
-        z-index: -1;
+        background-color: #171717;
+        color: #fff;
+        line-height: 1.6;
+        position: relative;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
       }
-      .matrix span {
+
+      .lines {
         position: absolute;
-        color: #0f0;
-        font-size: 20px;
-        animation: move 10s linear infinite;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        margin: auto;
+        width: 90vw;
       }
-      @keyframes move {
-        from {
-          transform: translateY(-100%);
+
+      .line {
+        position: absolute;
+        width: 1px;
+        height: 100%;
+        top: 0;
+        left: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+
+      .line::after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 15vh;
+        width: 100%;
+        top: -50%;
+        left: 0;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+        animation: drop 7s 0s infinite;
+        animation-fill-mode: forwards;
+        animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+      }
+
+      .line:nth-child(1) {
+        margin-left: -25%;
+      }
+
+      .line:nth-child(1)::after {
+        animation-delay: 2s;
+      }
+
+      .line:nth-child(3) {
+        margin-left: 25%;
+      }
+
+      .line:nth-child(3)::after {
+        animation-delay: 2.5s;
+      }
+
+      @keyframes drop {
+        0% {
+          top: -50%;
         }
-        to {
-          transform: translateY(100%);
+        100% {
+          top: 110%;
         }
       }
+
+      /* Content Styles */
+      #mainContent {
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 20px;
+      }
+
+      header {
+        margin-bottom: 50px;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 50px 0;
+        margin: 30px 0;
       }
-      th,
-      td {
+
+      th, td {
         padding: 12px;
         border: 1px solid #444;
         text-align: left;
       }
+
       th {
         background-color: #333;
       }
+
       td {
         background-color: #222;
       }
+
       button {
         background-color: #444;
         color: #fff;
         border: none;
         padding: 10px;
-        cursor: pointer;
+        cursor: not-allowed;
         transition: background-color 0.3s;
       }
 
       button.active {
-        background-color: #0f0; /* Green for active */
+        background-color: #0a5;
         cursor: pointer;
-      }
-
-      button.inactive {
-        background-color: #888; /* Gray for inactive */
-        cursor: not-allowed;
-      }
-
-      #mainContent {
-        transform: scale(0.9); /* Zoom out the content */
-        transform-origin: top center;
       }
     </style>
   </head>
   <body>
+    <!-- Theme Lines -->
+    <div class="lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+
     <!-- Main Content -->
     <div id="mainContent" class="w3-main">
       <header id="home" class="w3-container w3-center w3-padding-32">
         <h1 class="w3-jumbo">Data Structure Course</h1>
         <p class="w3-text-light-grey">Master the Fundamentals</p>
+        <!-- You can write your introduction and contact details here -->
+        <p>Introduction text goes here. Contact us: email@example.com</p>
       </header>
 
+      <!-- Course Content -->
       <div id="overview" class="w3-container">
         <h2>Course Overview</h2>
         <p>
@@ -95,7 +161,32 @@
         </p>
       </div>
 
-      <!-- 15-Week Table -->
+      <!-- Weeks 0-15 -->
+      <!-- Week 0 -->
+      <div id="week0" class="w3-container">
+        <h2>Week 0</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Answer Pack</th>
+              <th>Problem Pack</th>
+              <th>PDF Pack</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Week 0</td>
+              <td><button class="inactive">Answer Pack</button></td>
+              <td><button class="inactive">Problem Pack</button></td>
+              <td><button class="inactive">PDF Pack</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Repeat for Weeks 1 to 15 -->
+      <!-- Example for Week 1 -->
       <div id="week1" class="w3-container">
         <h2>Week 1</h2>
         <table>
@@ -110,300 +201,17 @@
           <tbody>
             <tr>
               <td>Week 1</td>
-              <td><button data-link="data/week1_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week1_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week1_pdfs.pdf" class="inactive">PDF Pack</button></td>
+              <td><button class="inactive">Answer Pack</button></td>
+              <td><button class="inactive">Problem Pack</button></td>
+              <td><button class="inactive">PDF Pack</button></td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div id="week2" class="w3-container">
-        <h2>Week 2</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 2</td>
-              <td><button data-link="data/week2_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week2_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week2_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Repeat for Weeks 2 to 15 -->
 
-      <div id="week3" class="w3-container">
-        <h2>Week 3</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 3</td>
-              <td><button data-link="data/week3_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week3_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week3_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week4" class="w3-container">
-        <h2>Week 4</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 4</td>
-              <td><button data-link="data/week4_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week4_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week4_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week5" class="w3-container">
-        <h2>Week 5</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 5</td>
-              <td><button data-link="data/week5_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week5_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week5_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week6" class="w3-container">
-        <h2>Week 6</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 6</td>
-              <td><button data-link="data/week6_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week6_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week6_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week7" class="w3-container">
-        <h2>Week 7</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 7</td>
-              <td><button data-link="data/week7_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week7_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week7_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week8" class="w3-container">
-        <h2>Week 8</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 8</td>
-              <td><button data-link="data/week8_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week8_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week8_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week9" class="w3-container">
-        <h2>Week 9</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 9</td>
-              <td><button data-link="data/week9_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week9_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week9_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week10" class="w3-container">
-        <h2>Week 10</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 10</td>
-              <td><button data-link="data/week10_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week10_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week10_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week11" class="w3-container">
-        <h2>Week 11</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 11</td>
-              <td><button data-link="data/week11_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week11_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week11_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week12" class="w3-container">
-        <h2>Week 12</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 12</td>
-              <td><button data-link="data/week12_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week12_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week12_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week13" class="w3-container">
-        <h2>Week 13</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 13</td>
-              <td><button data-link="data/week13_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week13_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week13_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="week14" class="w3-container">
-        <h2>Week 14</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Week</th>
-              <th>Answer Pack</th>
-              <th>Problem Pack</th>
-              <th>PDF Pack</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Week 14</td>
-              <td><button data-link="data/week14_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week14_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week14_pdfs.pdf" class="inactive">PDF Pack</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+      <!-- Week 15 -->
       <div id="week15" class="w3-container">
         <h2>Week 15</h2>
         <table>
@@ -418,9 +226,9 @@
           <tbody>
             <tr>
               <td>Week 15</td>
-              <td><button data-link="data/week15_answers.pdf" class="inactive">Answer Pack</button></td>
-              <td><button data-link="data/week15_problems.pdf" class="inactive">Problem Pack</button></td>
-              <td><button data-link="data/week15_pdfs.pdf" class="inactive">PDF Pack</button></td>
+              <td><button class="inactive">Answer Pack</button></td>
+              <td><button class="inactive">Problem Pack</button></td>
+              <td><button class="inactive">PDF Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -428,22 +236,19 @@
     </div>
 
     <script>
-      document.querySelectorAll('button').forEach(button => {
-        const isAvailable = button.getAttribute('data-link') !== ""; // Modify this logic if needed
+      // Update button colors based on file uploads
+      function updateButtonStatus(week, fileUploaded) {
+        const buttons = document.querySelectorAll(`#week${week} button`);
+        buttons.forEach((button) => {
+          if (fileUploaded) {
+            button.classList.remove("inactive");
+            button.classList.add("active");
+          }
+        });
+      }
 
-        if (isAvailable) {
-          button.classList.remove('inactive');
-          button.classList.add('active');
-          button.onclick = function() {
-            window.location.href = button.getAttribute('data-link');
-          };
-        } else {
-          button.classList.add('inactive');
-          button.onclick = function() {
-            alert('This content is not available yet.');
-          };
-        }
-      });
+      // Example of enabling week 1 buttons after upload
+      updateButtonStatus(1, true); // Set to false to keep them gray
     </script>
   </body>
 </html>
