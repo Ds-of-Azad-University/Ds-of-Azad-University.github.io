@@ -133,15 +133,16 @@
         transition: background-color 0.3s;
         font-size: 16px;
         width: 100%;
+        text-align: center;
       }
 
       button.active {
-        background-color: #0a5;
+        background-color: #0a5; /* Light green */
         cursor: pointer;
       }
 
       button.inactive {
-        background-color: #777;
+        background-color: #777; /* Gray */
       }
 
       h2 {
@@ -209,9 +210,9 @@
           <tbody>
             <tr>
               <td>Week 0</td>
-              <td><button class="inactive" onclick="openLink('week0', 'problem')">Problem Pack</button></td>
-              <td><button class="inactive" onclick="openLink('week0', 'pdf')">PDF Pack</button></td>
-              <td><button class="inactive" onclick="openLink('week0', 'answer')">Answer Pack</button></td>
+              <td><button id="week0-problem" class="inactive">Problem Pack</button></td>
+              <td><button id="week0-pdf" class="inactive">PDF Pack</button></td>
+              <td><button id="week0-answer" class="inactive">Answer Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -233,9 +234,9 @@
           <tbody>
             <tr>
               <td>Week 1</td>
-              <td><button class="inactive" onclick="openLink('week1', 'problem')">Problem Pack</button></td>
-              <td><button class="inactive" onclick="openLink('week1', 'pdf')">PDF Pack</button></td>
-              <td><button class="inactive" onclick="openLink('week1', 'answer')">Answer Pack</button></td>
+              <td><button id="week1-problem" class="inactive">Problem Pack</button></td>
+              <td><button id="week1-pdf" class="inactive">PDF Pack</button></td>
+              <td><button id="week1-answer" class="inactive">Answer Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -258,9 +259,9 @@
           <tbody>
             <tr>
               <td>Week 15</td>
-              <td><button class="inactive" onclick="openLink('week15', 'problem')">Problem Pack</button></td>
-              <td><button class="inactive" onclick="openLink('week15', 'pdf')">PDF Pack</button></td>
-              <td><button class="inactive" onclick="openLink('week15', 'answer')">Answer Pack</button></td>
+              <td><button id="week15-problem" class="inactive">Problem Pack</button></td>
+              <td><button id="week15-pdf" class="inactive">PDF Pack</button></td>
+              <td><button id="week15-answer" class="inactive">Answer Pack</button></td>
             </tr>
           </tbody>
         </table>
@@ -270,29 +271,38 @@
     <script>
       // Function to open the link or show message
       function openLink(week, type) {
-        const button = document.querySelector(`#${week} button.${type}`);
+        const button = document.querySelector(`#${week}-${type}`);
         if (button && button.classList.contains('active')) {
-          // Add your file link logic here
-          alert(`Opening ${type} for ${week}`);
+          // Construct file path and open it
+          const filePath = `data/${week}/${type}.pdf`; // Update the extension based on your files
+          window.open(filePath, '_blank');
         } else {
           alert('This file is not available yet.');
         }
       }
 
       // Update button colors based on file uploads
-      function updateButtonStatus(week, fileUploaded) {
+      function updateButtonStatus(week, fileStatus) {
         const buttons = document.querySelectorAll(`#${week} button`);
         buttons.forEach((button) => {
-          if (fileUploaded) {
+          if (fileStatus[button.id]) {
             button.classList.remove("inactive");
             button.classList.add("active");
-            button.onclick = () => openLink(week, button.textContent.toLowerCase().replace(' ', '-'));
+            button.onclick = () => openLink(week, button.id.split('-')[1]); // Set up link opening
+          } else {
+            button.classList.remove("active");
+            button.classList.add("inactive");
+            button.onclick = () => alert('This file is not available yet.');
           }
         });
       }
 
       // Example of enabling week 1 buttons after upload
-      updateButtonStatus(0, true); // Set to false to keep them gray
+      updateButtonStatus('week0', {
+        'week0-problem': true, // Set to false to keep them gray
+        'week0-pdf': false,
+        'week0-answer': false,
+      });
     </script>
   </body>
 </html>
