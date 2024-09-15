@@ -162,10 +162,10 @@
 <!-- Week sections with buttons -->
 <div id="weeks-container">
     <!-- Loop for Week 1 to Week 15 -->
-    <div class="week-box" id="week-1">
+    <div class="week-box" id="week1">
         <h3>Week 1</h3>
         <button class="inactive" id="problem-pack-jupyter-1">Problem Pack (Jupyter)</button>
-        <button class="inactive" id="problem-pack-pdf-1">Problem Pack (PDF)</button>
+        <button class="inactive" id="problem_pack1.pdf">Problem Pack (PDF)</button>
         <button class="inactive" id="answer-pack-jupyter-1">Answer Pack (Jupyter)</button>
     </div>
 
@@ -189,7 +189,7 @@
 <script>
     function setDownloadLinks(week, jupyterLink, pdfLink, answerLink) {
     const jupyterButton = document.querySelector(`#problem-pack-jupyter-${week}`);
-    const pdfButton = document.querySelector(`#problem-pack-pdf-${week}`);
+    const pdfButton = document.querySelector(`#problem_pack${week}.pdf`);
     const answerButton = document.querySelector(`#answer-pack-jupyter-${week}`);
 
     jupyterButton.className = 'active';
@@ -200,7 +200,7 @@
     pdfButton.onclick = function() { window.location.href = pdfLink; };
     answerButton.onclick = function() { window.location.href = answerLink; };
 }
-setDownloadLinks(1, 'https://github.com/your-repo/data/week1/problem_pack1.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/blob/main/data/week1/problem_pack1.pdf', 'https://github.com/your-repo/data/week1/answer_pack1.ipynb');
+setDownloadLinks(1, 'https://google.com', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/blob/main/data/week1/problem_pack1.pdf', 'https://google.com');
 
 </script>
 
