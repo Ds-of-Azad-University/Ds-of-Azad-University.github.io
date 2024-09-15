@@ -1,269 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Data Structure Course</title>
-  <style>
-    /* General Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box !important;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures TA - Semester Overview</title>
+    <style>
+        /* Background CSS with animated lines */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box !important;
+        }
 
-    html, body {
-      height: 100%;
-      zoom: 0.9;
-    }
+        html, body {
+            height: 100%;
+        }
 
-    body {
-      display: table;
-      width: 100%;
-      height: 100%;
-      background-color: #171717;
-      color: #fff;
-      line-height: 1.6;
-      position: relative;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+        body {
+            display: table;
+            width: 100%;
+            height: 100%;
+            background-color: #171717;
+            color: #000;
+            line-height: 1.6;
+            position: relative;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
 
-    .lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-      margin: auto;
-      width: 90vw;
-    }
+        .lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            margin: auto;
+            width: 90vw;
+        }
 
-    .line {
-      position: absolute;
-      width: 1px;
-      height: 100%;
-      top: 0;
-      left: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-    }
+        .line {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
 
-    .line::after {
-      content: '';
-      display: block;
-      position: absolute;
-      height: 15vh;
-      width: 100%;
-      top: -50%;
-      left: 0;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-      animation: drop 7s 0s infinite;
-      animation-fill-mode: forwards;
-      animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-    }
+        .line::after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 15vh;
+            width: 100%;
+            top: -50%;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+            animation: drop 7s 0s infinite;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+        }
 
-    .line:nth-child(1) {
-      margin-left: -25%;
-    }
+        .line:nth-child(1) {
+            margin-left: -25%;
+        }
 
-    .line:nth-child(1)::after {
-      animation-delay: 2s;
-    }
+        .line:nth-child(1)::after {
+            animation-delay: 2s;
+        }
 
-    .line:nth-child(3) {
-      margin-left: 25%;
-    }
+        .line:nth-child(3) {
+            margin-left: 25%;
+        }
 
-    .line:nth-child(3)::after {
-      animation-delay: 2.5s;
-    }
+        .line:nth-child(3)::after {
+            animation-delay: 2.5s;
+        }
 
-    @keyframes drop {
-      0% {
-        top: -50%;
-      }
-      100% {
-        top: 110%;
-      }
-    }
+        @keyframes drop {
+            0% {
+                top: -50%;
+            }
+            100% {
+                top: 110%;
+            }
+        }
 
-    /* Content Styles */
-    #mainContent {
-      width: 90%;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 20px;
-    }
+        /* Layout for header and content */
+        header {
+            padding: 20px;
+            text-align: center;
+            background-color: #333;
+            color: white;
+        }
 
-    header {
-      margin-bottom: 50px;
-    }
+        .instructions {
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px dashed #ddd;
+            width: 80%;
+            background-color: white;
+        }
 
-    .w3-container {
-      margin: 30px 0;
-    }
+        .week-box {
+            margin: 10px auto;
+            padding: 15px;
+            border: 2px solid red;
+            border-radius: 5px;
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 30px 0;
-    }
+        .week-box h3 {
+            margin: 0;
+            flex-grow: 1;
+        }
 
-    th, td {
-      padding: 12px;
-      border: 1px solid #444;
-      text-align: left;
-    }
+        .week-box button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
 
-    th {
-      background-color: #333;
-      text-align: center;
-    }
+        .inactive {
+            background-color: #aaa;
+            color: white;
+            cursor: not-allowed;
+        }
 
-    td {
-      background-color: #222;
-    }
-
-    button {
-      background-color: #444;
-      color: #fff;
-      border: none;
-      padding: 20px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: not-allowed;
-      transition: background-color 0.3s;
-      margin: 0 10px;
-      border-radius: 5px;
-    }
-
-    button.active {
-      background-color: #0a5; /* Slight green */
-      cursor: pointer;
-    }
-
-    button.inactive {
-      background-color: #555; /* Gray */
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      text-align: center;
-      color: #fff;
-    }
-
-    .week-container {
-      padding: 20px;
-      border: 2px solid #ff3c00; /* Slight red border */
-      background-color: #333;
-      margin-bottom: 40px; /* Increased space between sections */
-      border-radius: 8px;
-    }
-
-    .week-title {
-      text-align: center;
-      font-size: 28px; /* Increased size */
-      font-weight: bold; /* Bold title */
-      color: #fff;
-      margin-bottom: 20px;
-    }
-  </style>
+        .active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-  <!-- Theme Lines -->
-  <div class="lines">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
 
-  <!-- Main Content -->
-  <div id="mainContent" class="w3-main">
-    <header id="home" class="w3-container w3-center w3-padding-32">
-      <h1 class="w3-jumbo">Data Structure Course</h1>
-      <p class="w3-text-light-grey">Master the Fundamentals</p>
-      <!-- Introduction and Contact Us -->
-      <p>Introduction text goes here. Contact us: email@example.com</p>
-    </header>
+<div class="lines">
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+</div>
 
-    <!-- Course Content -->
-    <div id="overview" class="w3-container">
-      <h2>Course Overview</h2>
-      <p>
-        This course covers essential data structures and algorithms, designed
-        to build a strong foundation in programming and problem-solving.
-      </p>
+<header>
+    <h1>Data Structures - TA Semester Overview</h1>
+</header>
+
+<div class="instructions">
+    <h2>Instructions & Goals for this Semester</h2>
+    <p> <!-- Placeholder text to be replaced with your instructions -->
+        This section will contain instructions, goals, and key details for the semester. As a TA, we will guide students through their journey of mastering data structures.
+    </p>
+</div>
+
+<!-- Week sections with buttons -->
+<div id="weeks-container">
+    <!-- Loop for Week 1 to Week 15 -->
+    <div class="week-box" id="week-1">
+        <h3>Week 1</h3>
+        <button class="inactive" id="problem-pack-jupyter-1">Problem Pack (Jupyter)</button>
+        <button class="inactive" id="problem-pack-pdf-1">Problem Pack (PDF)</button>
+        <button class="inactive" id="answer-pack-jupyter-1">Answer Pack (Jupyter)</button>
     </div>
 
-    <!-- Weeks 0-2 -->
-    <!-- Week 0 -->
-    <div id="week0" class="week-container">
-      <div class="week-title">Week 0</div>
-      <button id="week0-problem" class="inactive">Problem Pack</button>
-      <button id="week0-pdf" class="inactive">PDF Pack</button>
-      <button id="week0-answer" class="inactive">Answer Pack</button>
+    <div class="week-box" id="week-2">
+        <h3>Week 2</h3>
+        <button class="inactive" id="problem-pack-jupyter-2">Problem Pack (Jupyter)</button>
+        <button class="inactive" id="problem-pack-pdf-2">Problem Pack (PDF)</button>
+        <button class="inactive" id="answer-pack-jupyter-2">Answer Pack (Jupyter)</button>
     </div>
 
-    <!-- Week 1 -->
-    <div id="week1" class="week-container">
-      <div class="week-title">Week 1</div>
-      <button id="week1-problem" class="inactive">Problem Pack</button>
-      <button id="week1-pdf" class="inactive">PDF Pack</button>
-      <button id="week1-answer" class="inactive">Answer Pack</button>
+    <!-- ... Repeat for Week 3 to Week 15 -->
+    
+    <div class="week-box" id="week-15">
+        <h3>Week 15</h3>
+        <button class="inactive" id="problem-pack-jupyter-15">Problem Pack (Jupyter)</button>
+        <button class="inactive" id="problem-pack-pdf-15">Problem Pack (PDF)</button>
+        <button class="inactive" id="answer-pack-jupyter-15">Answer Pack (Jupyter)</button>
     </div>
+</div>
 
-    <!-- Week 2 -->
-    <div id="week2" class="week-container">
-      <div class="week-title">Week 2</div>
-      <button id="week2-problem" class="inactive">Problem Pack</button>
-      <button id="week2-pdf" class="inactive">PDF Pack</button>
-      <button id="week2-answer" class="inactive">Answer Pack</button>
-    </div>
-  </div>
-
-  <script>
-    // Function to update button status with specific file paths
-    function updateButtonStatus(week, problemFile, pdfFile, answerFile) {
-      const problemButton = document.getElementById(`${week}-problem`);
-      const pdfButton = document.getElementById(`${week}-pdf`);
-      const answerButton = document.getElementById(`${week}-answer`);
-
-      if (problemFile) {
-        problemButton.classList.remove('inactive');
-        problemButton.classList.add('active');
-        problemButton.onclick = function() {
-          window.open(problemFile, '_blank');
-        };
-      }
-
-      if (pdfFile) {
-        pdfButton.classList.remove('inactive');
-        pdfButton.classList.add('active');
-        pdfButton.onclick = function() {
-          window.open(pdfFile, '_blank');
-        };
-      }
-
-      if (answerFile) {
-        answerButton.classList.remove('inactive');
-        answerButton.classList.add('active');
-        answerButton.onclick = function() {
-          window.open(answerFile, '_blank');
-        };
-      }
+<script>
+    // Activation function for making buttons active and clickable
+    function activateButtons(week, isActive) {
+        document.querySelector(`#problem-pack-jupyter-${week}`).className = isActive ? 'active' : 'inactive';
+        document.querySelector(`#problem-pack-pdf-${week}`).className = isActive ? 'active' : 'inactive';
+        document.querySelector(`#answer-pack-jupyter-${week}`).className = isActive ? 'active' : 'inactive';
+        
+        if (isActive) {
+            document.querySelector(`#problem-pack-jupyter-${week}`).onclick = function() { window.open(`data/week${week}/problem_pack${week}.ipynb`); };
+            document.querySelector(`#problem-pack-pdf-${week}`).onclick = function() { window.open(`data/week${week}/problem_pack${week}.pdf`); };
+            document.querySelector(`#answer-pack-jupyter-${week}`).onclick = function() { window.open(`data/week${week}/answer_pack${week}.ipynb`); };
+        } else {
+            document.querySelector(`#problem-pack-jupyter-${week}`).onclick = null;
+            document.querySelector(`#problem-pack-pdf-${week}`).onclick = null;
+            document.querySelector(`#answer-pack-jupyter-${week}`).onclick = null;
+        }
     }
 
-    // Example usage with specific file paths
+    // Example to activate Week 1
+    activateButtons(1, true); // Change 'true' to 'false' to deactivate
+</script>
 
-    // Set file status for Week 0
-    updateButtonStatus('week0', 'data/week0/problem_pack.pdf', '', ''); // Problem Pack active, others inactive
-
-    // Set file status for Week 1
-    updateButtonStatus('week1', 'data/week1/problem_pack.pdf', 'data/week1/pdf_pack.pdf', ''); // Problem and PDF Packs active, Answer Pack inactive
-
-    // Set file status for Week 2
-    updateButtonStatus('week2', '', 'data/week2/pdf_pack.pdf', 'data/week2/answer_pack.pdf'); // PDF and Answer Packs active, Problem Pack inactive
-  </script>
 </body>
 </html>
