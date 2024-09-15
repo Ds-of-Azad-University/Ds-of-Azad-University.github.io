@@ -194,21 +194,27 @@
 </div>
 
 <script>
-    function setDownloadLinks(week, jupyterLink, pdfLink, answerLink) {
+    function setDownloadLinks(week, pdfLink, jupyterLink, answerLink) {
+        const pdfButton = document.querySelector(`#problem-pack-pdf-${week}`);
         const jupyterButton = document.querySelector(`#problem-pack-jupyter-${week}`);
-        const pdfButton = document.querySelector(`#problem_pack${week}.pdf`);
         const answerButton = document.querySelector(`#answer-pack-jupyter-${week}`);
 
-        jupyterButton.className = 'active';
-        pdfButton.className = 'active';
-        answerButton.className = 'active';
-
-        jupyterButton.onclick = function() { window.open(jupyterLink, '_blank'); };
-        pdfButton.onclick = function() { window.open(pdfLink, '_blank'); };
-        answerButton.onclick = function() { window.open(answerLink, '_blank'); };
+        if (pdfLink) {
+            pdfButton.className = 'active';
+            pdfButton.onclick = function() { window.open(pdfLink, '_blank'); };
+        }
+        if (jupyterLink) {
+            jupyterButton.className = 'active';
+            jupyterButton.onclick = function() { window.open(jupyterLink, '_blank'); };
+        }
+        if (answerLink) {
+            answerButton.className = 'active';
+            answerButton.onclick = function() { window.open(answerLink, '_blank'); };
+        }
     }
 
-    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/answer_pack1.ipynb');
+    // Test with week 1
+    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', null, null);
 </script>
 
 </body>
