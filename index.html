@@ -165,11 +165,11 @@
     <div class="week-box" id="week1">
         <h3>Week 1</h3>
         <button class="inactive" id="problem-pack-jupyter-1">Problem Pack (Jupyter)</button>
-        <button class="inactive" id="problem_pack1.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="problem-pack-pdf-1">Problem Pack (PDF)</button>
         <button class="inactive" id="answer-pack-jupyter-1">Answer Pack (Jupyter)</button>
     </div>
 
-    <div class="week-box" id="week-2">
+    <div class="week-box" id="week2">
         <h3>Week 2</h3>
         <button class="inactive" id="problem-pack-jupyter-2">Problem Pack (Jupyter)</button>
         <button class="inactive" id="problem-pack-pdf-2">Problem Pack (PDF)</button>
@@ -178,7 +178,7 @@
 
     <!-- ... Repeat for Week 3 to Week 15 -->
     
-    <div class="week-box" id="week-15">
+    <div class="week-box" id="week15">
         <h3>Week 15</h3>
         <button class="inactive" id="problem-pack-jupyter-15">Problem Pack (Jupyter)</button>
         <button class="inactive" id="problem-pack-pdf-15">Problem Pack (PDF)</button>
@@ -188,20 +188,25 @@
 
 <script>
     function setDownloadLinks(week, jupyterLink, pdfLink, answerLink) {
-    const jupyterButton = document.querySelector(`#problem-pack-jupyter-${week}`);
-    const pdfButton = document.querySelector(`#problem_pack${week}.pdf`);
-    const answerButton = document.querySelector(`#answer-pack-jupyter-${week}`);
+        const jupyterButton = document.querySelector(`#problem-pack-jupyter-${week}`);
+        const pdfButton = document.querySelector(`#problem-pack-pdf-${week}`);
+        const answerButton = document.querySelector(`#answer-pack-jupyter-${week}`);
 
-    jupyterButton.className = 'active';
-    pdfButton.className = 'active';
-    answerButton.className = 'active';
+        jupyterButton.className = 'active';
+        pdfButton.className = 'active';
+        answerButton.className = 'active';
 
-    jupyterButton.onclick = function() { window.location.href = jupyterLink; };
-    pdfButton.onclick = function() { window.location.href = pdfLink; };
-    answerButton.onclick = function() { window.location.href = answerLink; };
-}
-setDownloadLinks(1, 'https://google.com', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/blob/main/data/week1/problem_pack1.pdf', 'https://google.com');
+        jupyterButton.onclick = function() { window.open(jupyterLink, '_blank'); };
+        pdfButton.onclick = function() { window.open(pdfLink, '_blank'); };
+        answerButton.onclick = function() { window.open(answerLink, '_blank'); };
+    }
 
+    // Setting download links for all weeks
+    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/answer_pack1.ipynb');
+
+    setDownloadLinks(2, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week2/problem_pack2.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week2/problem_pack2.pdf', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week2/answer_pack2.ipynb');
+
+    // Repeat the same for other weeks up to week 15
 </script>
 
 </body>
