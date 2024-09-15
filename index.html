@@ -57,7 +57,7 @@
             top: -50%;
             left: 0;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-            animation: drop 7s 0s infinite;
+            animation: drop 5s 0s infinite; /* Reduced from 7s to 5s */
             animation-fill-mode: forwards;
             animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
         }
@@ -172,14 +172,14 @@
     <div class="week-box" id="week1">
         <h3>Week 1</h3>
         <button class="inactive" id="problem-pack-jupyter-1">Problem Pack (Jupyter)</button>
-        <button class="inactive" id="problem_pack1.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="problem-pack-pdf-1">Problem Pack (PDF)</button>
         <button class="inactive" id="answer-pack-jupyter-1">Answer Pack (Jupyter)</button>
     </div>
 
     <div class="week-box" id="week2">
         <h3>Week 2</h3>
         <button class="inactive" id="problem-pack-jupyter-2">Problem Pack (Jupyter)</button>
-        <button class="inactive" id="problem_pack2.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="problem-pack-pdf-2">Problem Pack (PDF)</button>
         <button class="inactive" id="answer-pack-jupyter-2">Answer Pack (Jupyter)</button>
     </div>
 
@@ -188,7 +188,7 @@
     <div class="week-box" id="week15">
         <h3>Week 15</h3>
         <button class="inactive" id="problem-pack-jupyter-15">Problem Pack (Jupyter)</button>
-        <button class="inactive" id="problem_pack15.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="problem-pack-pdf-15">Problem Pack (PDF)</button>
         <button class="inactive" id="answer-pack-jupyter-15">Answer Pack (Jupyter)</button>
     </div>
 </div>
@@ -214,8 +214,9 @@
     }
 
     // Test with week 1
-    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', null, null);
+    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/answer_pack1.ipynb');
 </script>
 
 </body>
 </html>
+v
