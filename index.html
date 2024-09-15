@@ -17,13 +17,15 @@
         }
 
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            display: table;
+            width: 100%;
+            height: 100%;
             background-color: #171717;
             color: #000;
+            line-height: 1.6;
+            position: relative;
             font-family: sans-serif;
+            overflow: hidden;
         }
 
         .lines {
@@ -43,14 +45,54 @@
             top: 0;
             left: 50%;
             background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
         }
 
+        .line::after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 15vh;
+            width: 100%;
+            top: -50%;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+            animation: drop 7s 0s infinite;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+        }
+
+        .line:nth-child(1) {
+            margin-left: -25%;
+        }
+
+        .line:nth-child(1)::after {
+            animation-delay: 2s;
+        }
+
+        .line:nth-child(3) {
+            margin-left: 25%;
+        }
+
+        .line:nth-child(3)::after {
+            animation-delay: 2.5s;
+        }
+
+        @keyframes drop {
+            0% {
+                top: -50%;
+            }
+            100% {
+                top: 110%;
+            }
+        }
+
+        /* Layout for header and content */
         header {
             padding: 20px;
             text-align: center;
             background-color: #333;
             color: white;
-            width: 100%;
         }
 
         .instructions {
@@ -62,16 +104,22 @@
             background-color: white;
         }
 
+        /* Styling for horizontal week-boxes */
+        #weeks-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         .week-box {
-            margin: 20px auto;
-            padding: 20px;
+            margin: 10px;
+            padding: 15px;
             border: 2px solid red;
             border-radius: 5px;
-            width: 80%;
+            width: 300px;
+            text-align: center;
             background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .week-box h3 {
@@ -79,13 +127,12 @@
         }
 
         .week-box button {
-            padding: 15px 20px;
-            margin: 10px;
+            padding: 10px 15px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
+            border-radius: 5px;
             font-weight: bold;
-            width: 200px;
+            margin: 5px;
         }
 
         .inactive {
@@ -102,6 +149,12 @@
 </head>
 <body>
 
+<div class="lines">
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+</div>
+
 <header>
     <h1>Data Structures - TA Semester Overview</h1>
 </header>
@@ -109,51 +162,53 @@
 <div class="instructions">
     <h2>Instructions & Goals for this Semester</h2>
     <p> <!-- Placeholder text to be replaced with your instructions -->
-        This section will contain instructions, goals, and key details for the semester.
+        This section will contain instructions, goals, and key details for the semester. As a TA, we will guide students through their journey of mastering data structures.
     </p>
 </div>
 
 <!-- Week sections with buttons -->
 <div id="weeks-container">
+    <!-- Week boxes arranged horizontally -->
     <div class="week-box" id="week1">
         <h3>Week 1</h3>
-        <button class="active" id="problem-pack-pdf-1">Problem Pack (PDF)</button>
-        <button class="inactive">Problem Pack (Jupyter)</button>
-        <button class="inactive">Answer Pack (Jupyter)</button>
+        <button class="inactive" id="problem-pack-jupyter-1">Problem Pack (Jupyter)</button>
+        <button class="inactive" id="problem_pack1.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="answer-pack-jupyter-1">Answer Pack (Jupyter)</button>
     </div>
 
     <div class="week-box" id="week2">
         <h3>Week 2</h3>
-        <button class="inactive">Problem Pack (PDF)</button>
-        <button class="inactive">Problem Pack (Jupyter)</button>
-        <button class="inactive">Answer Pack (Jupyter)</button>
+        <button class="inactive" id="problem-pack-jupyter-2">Problem Pack (Jupyter)</button>
+        <button class="inactive" id="problem_pack2.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="answer-pack-jupyter-2">Answer Pack (Jupyter)</button>
     </div>
-    
-    <!-- Repeat for Week 3 to Week 15 -->
+
+    <!-- Additional week-boxes go here -->
+
+    <div class="week-box" id="week15">
+        <h3>Week 15</h3>
+        <button class="inactive" id="problem-pack-jupyter-15">Problem Pack (Jupyter)</button>
+        <button class="inactive" id="problem_pack15.pdf">Problem Pack (PDF)</button>
+        <button class="inactive" id="answer-pack-jupyter-15">Answer Pack (Jupyter)</button>
+    </div>
 </div>
 
 <script>
-    function setDownloadLinks(week, pdfLink, jupyterLink, answerLink) {
-        const pdfButton = document.querySelector(`#problem-pack-pdf-${week}`);
+    function setDownloadLinks(week, jupyterLink, pdfLink, answerLink) {
         const jupyterButton = document.querySelector(`#problem-pack-jupyter-${week}`);
+        const pdfButton = document.querySelector(`#problem_pack${week}.pdf`);
         const answerButton = document.querySelector(`#answer-pack-jupyter-${week}`);
 
-        if (pdfLink) {
-            pdfButton.className = 'active';
-            pdfButton.onclick = function() { window.open(pdfLink, '_blank'); };
-        }
-        if (jupyterLink) {
-            jupyterButton.className = 'active';
-            jupyterButton.onclick = function() { window.open(jupyterLink, '_blank'); };
-        }
-        if (answerLink) {
-            answerButton.className = 'active';
-            answerButton.onclick = function() { window.open(answerLink, '_blank'); };
-        }
+        jupyterButton.className = 'active';
+        pdfButton.className = 'active';
+        answerButton.className = 'active';
+
+        jupyterButton.onclick = function() { window.open(jupyterLink, '_blank'); };
+        pdfButton.onclick = function() { window.open(pdfLink, '_blank'); };
+        answerButton.onclick = function() { window.open(answerLink, '_blank'); };
     }
 
-    // Test with week 1
-    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', null, null);
+    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/problem_pack1.pdf', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/raw/main/data/week1/answer_pack1.ipynb');
 </script>
 
 </body>
