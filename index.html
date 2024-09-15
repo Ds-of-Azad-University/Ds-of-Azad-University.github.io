@@ -194,9 +194,9 @@
         document.querySelector(`#answer-pack-jupyter-${week}`).className = isActive ? 'active' : 'inactive';
         
         if (isActive) {
-            document.querySelector(`#problem-pack-jupyter-${week}`).onclick = function() { window.open(`data/week${week}/problem_pack${week}.ipynb`); };
-            document.querySelector(`#problem-pack-pdf-${week}`).onclick = function() { window.open(`data/week${week}/problem_pack${week}.pdf`); };
-            document.querySelector(`#answer-pack-jupyter-${week}`).onclick = function() { window.open(`data/week${week}/answer_pack${week}.ipynb`); };
+            document.querySelector(`#problem-pack-jupyter-${week}`).onclick = function() { window.open(`https://github.com/hrnrxb/ds4031/raw/main/data/week${week}/problem_pack${week}.ipynb`); };
+            document.querySelector(`#problem-pack-pdf-${week}`).onclick = function() { window.open(`https://github.com/hrnrxb/ds4031/raw/main/data/week${week}/problem_pack${week}.pdf`); };
+            document.querySelector(`#answer-pack-jupyter-${week}`).onclick = function() { window.open(`https://github.com/hrnrxb/ds4031/raw/main/data/week${week}/answer_pack${week}.ipynb`); };
         } else {
             document.querySelector(`#problem-pack-jupyter-${week}`).onclick = null;
             document.querySelector(`#problem-pack-pdf-${week}`).onclick = null;
@@ -204,8 +204,8 @@
         }
     }
 
-    // Example to activate Week 1
-    activateButtons(1, true); // Change 'true' to 'false' to deactivate
+    // Example to activate Week 1 (change 'true' to 'false' to deactivate)
+    activateButtons(1, true); // Activates Week 1
 </script>
 
 </body>
