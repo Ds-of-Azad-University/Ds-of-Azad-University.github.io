@@ -187,25 +187,21 @@
 </div>
 
 <script>
-    // Activation function for making buttons active and clickable
-    function activateButtons(week, isActive) {
-        document.querySelector(`#problem-pack-jupyter-${week}`).className = isActive ? 'active' : 'inactive';
-        document.querySelector(`#problem-pack-pdf-${week}`).className = isActive ? 'active' : 'inactive';
-        document.querySelector(`#answer-pack-jupyter-${week}`).className = isActive ? 'active' : 'inactive';
-        
-        if (isActive) {
-            document.querySelector(`#problem-pack-jupyter-${week}`).onclick = function() { window.open(`https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/tree/main/data/week${week}/problem_pack${week}.ipynb`); };
-            document.querySelector(`#problem-pack-pdf-${week}`).onclick = function() { window.open(`https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/blob/main/data/week1/problem_pack1.pdf`); };
-            document.querySelector(`#answer-pack-jupyter-${week}`).onclick = function() { window.open(`https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/tree/main/data/week${week}/answer_pack${week}.ipynb`); };
-        } else {
-            document.querySelector(`#problem-pack-jupyter-${week}`).onclick = null;
-            document.querySelector(`#problem-pack-pdf-${week}`).onclick = null;
-            document.querySelector(`#answer-pack-jupyter-${week}`).onclick = null;
-        }
-    }
+    function setDownloadLinks(week, jupyterLink, pdfLink, answerLink) {
+    const jupyterButton = document.querySelector(`#problem-pack-jupyter-${week}`);
+    const pdfButton = document.querySelector(`#problem-pack-pdf-${week}`);
+    const answerButton = document.querySelector(`#answer-pack-jupyter-${week}`);
 
-    // Example to activate Week 1 (change 'true' to 'false' to deactivate)
-    activateButtons(1, true); // Activates Week 1
+    jupyterButton.className = 'active';
+    pdfButton.className = 'active';
+    answerButton.className = 'active';
+
+    jupyterButton.onclick = function() { window.location.href = jupyterLink; };
+    pdfButton.onclick = function() { window.location.href = pdfLink; };
+    answerButton.onclick = function() { window.location.href = answerLink; };
+}
+setDownloadLinks(1, 'https://github.com/your-repo/data/week1/problem_pack1.ipynb', 'https://github.com/Ds-of-Azad-University/Ds-of-Azad-University.github.io/blob/main/data/week1/problem_pack1.pdf', 'https://github.com/your-repo/data/week1/answer_pack1.ipynb');
+
 </script>
 
 </body>
